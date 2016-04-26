@@ -1,0 +1,906 @@
+/*
+Theme Name: COOD
+Theme URI:
+
+Author: StudioTeapot
+Author URI: http://www.studioteapot.in
+Version: 0.1
+
+*/
+
+/*** GLOBAL : GENERAL STYLE DEFAULTS ***/
+html
+{
+	margin: 0;
+	padding: 0;
+}
+body
+{
+	background: #ffffff !important;
+	margin: 0;
+}
+body, input, textarea
+{
+	color: #222;
+	font-family: Arial, sans-serif;
+	line-height: 1.5;
+}
+h1, h2, h3, h4, h5, h6
+{
+	font-weight: normal;
+	clear: both;
+}
+hr
+{
+	background-color: #999;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.5em;
+}
+pre
+{
+	font: 11px Monaco, monospace;
+	line-height: 1.5;
+	margin-bottom: 1.5em;
+}
+code
+{
+	font: 11px Monaco, monospace;
+}
+p
+{
+	margin: 4px 0 12px 0;
+}
+a
+{
+	color: #0a77e6;
+}
+a:hover
+{
+	color: #065c88;
+}
+a:visited
+{
+	color: #8b46d1;
+}
+
+
+
+/*** PAGE LAYOUT ***/
+
+/* Styles that affect the entire layout of the page */
+div#container
+{
+	margin: 4px 4px 4px 4px;
+}
+div#content
+{
+
+}
+
+
+/*** HEADER : MENU ***/
+
+/* To see a menu in your header, you'll need to first add one in WordPress Admin */
+.menu ul
+{
+    list-style: none;
+    margin: 0;
+}
+.menu ul ul
+{
+    display: none;
+}
+.menu li
+{
+    display: inline;
+    float: left;
+	padding: 0 8px 0 4px;
+}
+.menu-item
+{
+
+}
+.menu-item a
+{
+	font-size: 30px;
+	text-decoration: none;
+	color: #3eaf00;
+}
+.menu-item a:hover
+{
+	color: #5d8a05;
+}
+
+
+
+/*** HEADER : OTHER ***/
+
+
+
+/*** CONTENT : POSTS AND PAGES ***/
+
+/* Entry and Page Titles */
+h1.entry-title
+{
+
+}
+h2.entry-title
+{
+
+}
+h2.entry-title a
+{
+
+}
+h1.page-title
+{
+
+}
+
+/* Media Alignment */
+.alignright
+{
+	/* Style for right-aligned images in posts */
+	padding: 8px 0 8px 8px;
+	float: right;
+}
+.alignleft
+{
+	/* Style for left-aligned images in posts */
+	padding: 8px 8px 8px 0;
+	float: left;
+}
+
+/* Entry Content */
+.entry-content
+{
+	/* Style that affects actual entry/post content */
+}
+.entry-content a
+{
+
+}
+.entry-content a:hover
+{
+
+}
+.entry-content h1, h2, h3, h4, h5
+{
+
+}
+.entry-content ol li
+{
+
+}
+
+.entry-utility
+{
+	/* Style for the entry utility, which sits below a post and provides info like categories, tags, feeds, and an edit link (for authors) */
+}
+.entry-meta
+{
+	/* Style for the entry metadata (author, etc.) */
+}
+.skip-link
+{
+	/* Style for the skip link */
+	/*position: absolute;
+	left: -9000px;*/
+}
+.navigation
+{
+	/* Style for the navigation links (next/previous post) on a given post */
+}
+
+
+/*** CONTENT : COMMENTS ***/
+
+div#comments
+{
+	/* Style that affects the DIV containing all the comments */
+}
+.comments h3
+{
+	/* H3 header style for comments */
+}
+.comments ol
+{
+	/* Comments are displayed as ordered lists by default, so you want to style that list so it looks the way you want */
+}
+.comments ol li
+{
+	/* Style each list item in the comments ordered list */
+}
+.comments img
+{
+	/* Style for the user avatar beside each comment */
+	float: left;
+	margin: 0 12px 8px 0;
+}
+.comments .comment
+{
+	/* Style that applies to each individual comment in a series of comments */
+}
+
+.children ul li
+{
+	/* A style that refers to the children (as in, responses to) any given comment */
+}
+
+.comment-reply-link
+{
+	/* Style for the "Reply" link on a comment */
+}
+.comment-meta
+{
+	/* Style for metadata for a comment */
+}
+div#respond
+{
+	/* DIV that contains the comment response form */
+}
+div#respond h3
+{
+	/* H3 header for the comment response form */
+}
+
+
+/*** CONTENT : SIDEBAR ***/
+div#primary
+{
+	/* Primary Widget Area DIV */
+}
+div#secondary
+{
+	/* Secondary Widget Area DIV */
+}
+.widget-area
+{
+	/* Class that applies to BOTH widget areas */
+}
+.xoxo
+{
+	/* Class that applies to each item in each widget area (an unordered list class) */
+}
+
+
+/*** FOOTER ***/
+div#footer
+{
+	float: left;
+	clear: both;
+}
+
+
+
+/** perspective effect */
+/* Effect Move Left */
+.effect-moveleft {
+	background: #f4f3f1;
+}
+
+.effect-moveleft .container {
+	transition: transform 0.4s;
+	transform-origin: 50% 50%;
+}
+
+.effect-moveleft .container::after {
+	background: rgba(255,255,255,0.6);
+}
+
+.effect-moveleft.animate .container {
+	transform: translateX(-50%) rotateY(45deg) translateZ(-50px);
+}
+
+/* Fallback */
+.no-csstransforms3d .effect-moveleft.animate .container {
+	left: -75%;
+}
+
+/* Navigation */
+.effect-moveleft .outer-nav a {
+	color: #e86a32;
+	opacity: 0;
+	transform: translateX(100px) translateZ(-1000px);
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-moveleft .outer-nav a:hover {
+	color: #333;
+}
+
+.effect-moveleft.animate .outer-nav a {
+	opacity: 1;
+	transform: translateX(0) translateZ(0);
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(2) {
+	transition-delay: 0.04s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(3) {
+	transition-delay: 0.08s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(4) {
+	transition-delay: 0.12s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(5) {
+	transition-delay: 0.16s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(6) {
+	transition-delay: 0.2s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(7) {
+	transition-delay: 0.24s;
+}
+
+/* perspective animation end */
+
+/*** YOUR CSS ***/
+
+
+/* page 1*/
+.back{
+	width:100%;
+  height:100vh;
+  overflow:hidden;
+  position:relative;
+	z-index:3;
+}
+
+
+/* end page 1 */
+
+
+
+.logo_circle{
+  transition:all 0.6s ease-in-out;
+}
+
+.row1{
+  z-index:1;
+  width:100%;
+  height:100vh;
+  position:absolute;
+  -webkit-animation:fll 8s 1 linear;
+  animation:fll 8s 1 linear;
+  transition:all 0.8s ease-in-out;
+  opacity:1;
+
+
+}
+.row1 > div{
+  position:fixed;
+  width:200px;
+  height:200px;
+  left:50%;
+  top:50%;
+  margin-top:-100px;
+  margin-left: -100px;
+
+
+}
+.centr{ 																	   /*col holding the logo*/
+	position:fixed !important;
+	height:100vh;
+}
+.row2{   																		/*row holding the logo*/
+  width:100vw;
+  height:100vh;
+  z-index: 10;
+	position:absolute;
+	top:0;
+  margin:auto;
+  display:block;
+}
+
+.topp{
+	top:50px !important;
+
+}
+
+.page_2>.row>div>div{
+	text-align:center;
+
+}
+.page_2>.row>div{
+
+		position: fixed;
+    top: 50%;
+
+    transform: translate(0,-50%);
+}
+
+
+.sec1{
+	background-color:#0097A7;
+	height:100vh;
+	width:100vw;
+}
+.sec2{
+	background-color: #EF5350;
+	height:100vh;
+	width:100vw;
+}
+.sec3{
+	background-color: #66BB6A;
+	height:100vh;
+	width:100vw;
+}
+
+
+
+
+
+
+.row2>div>svg{                          /*logo*/
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	margin:0;
+	z-index:3;
+	transition:top 0s linear;
+
+
+}
+
+
+/* page_2 */
+
+.page_2{
+	width:100vw;
+	height:300vh;
+
+	z-index:1;
+}
+
+
+
+
+
+/* floating bubbles */
+.bubbles, .bubbles_h {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    z-index: 0;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.bubbles li , .bubbles_h li{
+    position: absolute;
+    list-style: none;
+    display: block;
+    bottom: -300px;
+    -webkit-animation: square 20s infinite;
+    animation: square 20s infinite;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+.bubbles_h li:nth-child(12) {
+    width: 80px;
+    height: 80px;
+    left: 20%;
+
+    -webkit-animation: square1 20s infinite;
+    animation: square1 20s infinite;
+}
+ .bubbles_h li:nth-child(11) {
+    width: 200px;
+    height: 200px;
+    left: 40%;
+    -webkit-animation: square2 17s infinite;
+    animation: square2 17s infinite;
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+}
+
+.bubbles_h li:nth-child(10) {
+    width: 100px;
+    height: 100px;
+    left: 60%;
+    -webkit-animation: square2 13s infinite;
+    animation: square2 13s infinite;
+    -webkit-animation-delay: 5s;
+    animation-delay: 5s;
+}
+
+ .bubbles_h li:nth-child(9) {
+    width: 150px;
+    height: 150px;
+    left: 80%;
+    -webkit-animation: square1 22s infinite;
+    animation: square1 22s infinite;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+.bubbles_h li:nth-child(8) {
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    -webkit-animation: square1 19s infinite;
+    animation: square1 19s infinite;
+
+
+}
+.bubbles_h li:nth-child(7) {
+    width: 120px;
+    height: 120px;
+    left: 30%;
+    -webkit-animation: square1 15s infinite;
+    animation: square1 15s infinite;
+    -webkit-animation-delay: 6s;
+    animation-delay: 6s;
+}
+.bubbles_h li:nth-child(6) {
+    width: 180px;
+    height: 180px;
+    left: 90%;
+    -webkit-animation: square1 25s infinite;
+    animation: square1 25s infinite;
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+
+}
+.bubbles_h li:nth-child(5) {
+    width: 100px;
+    height: 100px;
+    left: 5%;
+    -webkit-animation: square1 19s infinite;
+    animation: square1 19s infinite;
+    -webkit-animation-delay: 9s;
+    animation-delay: 9s;
+
+}
+ .bubbles_h li:nth-child(4) {
+    width: 130px;
+    height: 130px;
+    left: 7%;
+    -webkit-animation: square1 16s infinite;
+    animation: square1 16s infinite;
+    -webkit-animation-delay: 5s;
+    animation-delay: 5s;
+
+}
+ .bubbles_h li:nth-child(3) {
+  width: 145px;
+    height: 145px;
+    left: 50%;
+    -webkit-animation: square2 10s infinite;
+    animation: square2 10s infinite;
+    -webkit-animation-delay: 4s;
+    animation-delay: 4s;
+
+}
+.bubbles_h li:nth-child(2) {
+    width: 90px;
+    height: 90px;
+    left: 30%;
+    -webkit-animation: square1 25s infinite;
+    animation: square1 25s infinite;
+    -webkit-animation-delay: 8s;
+    animation-delay: 8s;
+
+}
+.bubbles_h li:nth-child(1) {
+    width: 180px;
+    height: 180px;
+    left: 10%;
+    -webkit-animation: square2 10s infinite;
+    animation: square2 10s infinite;
+    -webkit-animation-delay: 3s;
+    animation-delay: 3s;
+
+
+}
+
+.bubbles li:nth-child(1){
+    width: 80px;
+    height: 80px;
+    left: 90%;
+    -webkit-animation: square1 10s infinite;
+    animation: square1 10s infinite;
+		-webkit-animation-delay: 5s;
+		animation-delay: 5s;
+}
+.bubbles li:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    left: 40%;
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+    -webkit-animation-duration: 17s;
+    animation-duration: 17s;
+}
+
+.bubbles li:nth-child(3){
+    width: 100px;
+    height: 100px;
+    left: 45%;
+    -webkit-animation-delay: 8s;
+    animation-delay: 8s;
+    -webkit-animation-duration: 13s;
+    animation-duration: 13s;
+}
+
+.bubbles li:nth-child(4) {
+    width: 150px;
+    height: 150px;
+    left: 80%;
+    -webkit-animation-delay: 6s;
+    animation-delay: 6s;
+    -webkit-animation-duration: 22s;
+    animation-duration: 22s;
+}
+
+.bubbles li:nth-child(5){
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    -webkit-animation: square1 12s infinite;
+    animation: square1 12s infinite;
+
+
+}
+.bubbles li:nth-child(6) {
+    width: 120px;
+    height: 120px;
+    left: 10%;
+    -webkit-animation-delay: 12s;
+    animation-delay: 12s;
+    -webkit-animation-duration: 20s;
+    animation-duration: 20s;
+}
+.bubbles li:nth-child(7){
+    width: 180px;
+    height: 180px;
+    left: 35%;
+    -webkit-animation: square1 20s infinite;
+    animation: square1 20s infinite;
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+
+}
+.bubbles li:nth-child(8) {
+    width: 100px;
+    height: 100px;
+    left: 5%;
+    -webkit-animation: square2 19s infinite;
+    animation: square2 19s infinite;
+    -webkit-animation-delay: 19s;
+    animation-delay: 19s;
+
+}
+.bubbles li:nth-child(9){
+    width: 130px;
+    height: 130px;
+    left: 70%;
+    -webkit-animation: square2 17s infinite;
+    animation: square2 17s infinite;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+
+}
+.bubbles li:nth-child(10){
+    width: 145px;
+    height: 145px;
+    left: 50%;
+    -webkit-animation: square2 10s infinite;
+    animation: square2 10s infinite;
+    -webkit-animation-delay: 4s;
+    animation-delay: 4s;
+
+}
+.bubbles li:nth-child(11) {
+    width: 90px;
+    height: 90px;
+    left: 70%;
+    -webkit-animation: square2 23s infinite;
+    animation: square2 23s infinite;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+
+}
+.bubbles li:nth-child(12){
+    width: 180px;
+    height: 180px;
+    left: 10%;
+    -webkit-animation: square2 19s infinite;
+    animation: square2 19s infinite;
+
+}
+
+/* floating bubbles screen 1 */
+
+/* animations */
+
+@-webkit-keyframes square {
+	0% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+	}
+	30% {
+			-webkit-transform: translateY(-40vh) rotate(180deg);
+			transform:  translateY(-40vh) rotate(180deg);
+	}
+	60% {
+			-webkit-transform: translateY(-60vh) rotate(180deg);
+			transform:  translateY(-60vh) rotate(180deg);
+	}
+
+	80% {
+			-webkit-transform: translateY(-90vh) rotate(540deg);
+			transform: translateY(-90vh) rotate(540deg);
+	}
+	100% {
+			-webkit-transform: translateY(-130vh) rotate(180deg);
+			transform: translateY(-130vh) rotate(180deg);
+	}
+}
+
+@keyframes square {
+	0% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+	}
+	30% {
+			-webkit-transform: translateY(-40vh) rotate(180deg);
+			transform:  translateY(-40vh) rotate(180deg);
+	}
+	60% {
+			-webkit-transform: translateY(-60vh) rotate(180deg);
+			transform:  translateY(-60vh) rotate(180deg);
+	}
+
+	80% {
+			-webkit-transform: translateY(-90vh) rotate(540deg);
+			transform: translateY(-90vh) rotate(540deg);
+	}
+	100% {
+			-webkit-transform: translateY(-130vh) rotate(180deg);
+			transform: translateY(-130vh) rotate(180deg);
+	}
+}
+@-webkit-keyframes square2 {
+	0% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+	}
+	30% {
+			-webkit-transform: translateY(-50vh) rotate(180deg);
+			transform:  translateY(-50vh) rotate(180deg);
+	}
+	60% {
+			-webkit-transform: translateY(-85vh) rotate(180deg);
+			transform:  translateY(-85vh) rotate(180deg);
+	}
+
+	80% {
+			-webkit-transform: translateY(-110vh) rotate(540deg);
+			transform: translateY(-110vh) rotate(540deg);
+	}
+	100% {
+			-webkit-transform: translateY(-140vh) rotate(180deg);
+			transform: translateY(-140vh) rotate(180deg);
+	}
+}
+
+@keyframes square2 {
+	0% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+	}
+	30% {
+			-webkit-transform: translateY(-50vh) rotate(180deg);
+			transform:  translateY(-50vh) rotate(180deg);
+	}
+	60% {
+			-webkit-transform: translateY(-85vh) rotate(180deg);
+			transform:  translateY(-85vh) rotate(180deg);
+	}
+
+	80% {
+			-webkit-transform: translateY(-110vh) rotate(540deg);
+			transform: translateY(-110vh) rotate(540deg);
+	}
+	100% {
+			-webkit-transform: translateY(-140vh) rotate(180deg);
+			transform: translateY(-140vh) rotate(180deg);
+	}
+}
+@-webkit-keyframes square1 {
+	0% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+	}
+	30% {
+			-webkit-transform: translateY(-30vh) rotate(180deg);
+			transform:  translateY(-30vh) rotate(180deg);
+	}
+	60% {
+			-webkit-transform: translateY(-75vh) rotate(180deg);
+			transform:  translateY(-75vh) rotate(180deg);
+	}
+
+	80% {
+			-webkit-transform: translateY(-100vh) rotate(540deg);
+			transform: translateY(-100vh) rotate(540deg);
+	}
+	100% {
+			-webkit-transform: translateY(-140vh) rotate(180deg);
+			transform: translateY(-140vh) rotate(180deg);
+	}
+}
+
+@keyframes square1 {
+	0% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+	}
+	30% {
+			-webkit-transform: translateY(-30vh) rotate(180deg);
+			transform:  translateY(-30vh) rotate(180deg);
+	}
+	60% {
+			-webkit-transform: translateY(-75vh) rotate(180deg);
+			transform:  translateY(-75vh) rotate(180deg);
+	}
+
+	80% {
+			-webkit-transform: translateY(-100vh) rotate(540deg);
+			transform: translateY(-100vh) rotate(540deg);
+	}
+	100% {
+			-webkit-transform: translateY(-140vh) rotate(180deg);
+			transform: translateY(-140vh) rotate(180deg);
+	}
+}
+@-webkit-keyframes fll{
+  0% {
+    opacity:0;
+  }
+  50% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+@keyframes fll{
+  0% {
+    opacity:0;
+  }
+  50% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+
+/* end  animations */
+
+
+
+body {background-color:black;z-index:1;overflow-x:hidden;}
+
+
+.page2{
+    height:100vh;
+    background-color: red;
+    z-index: 3;
+    position:relative;
+}

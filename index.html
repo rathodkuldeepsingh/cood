@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+	 <!-- Resource style -->
+  <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+	<script type="text/javascript" src="js/jquery.simplr.smoothscroll.js"></script>
+	<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/segment.min.js"></script>
+	<script src="js/d3-ease.v0.6.js"></script>
+
+	<script src="js/letters.js"></script>
+
+
+	<script type="text/javascript">
+
+
+
+
+
+
+
+		var myText;
+		var myText1;
+		var myText2;
+		var a=0;
+	$(function () {
+
+
+
+		var el = document.querySelector('.my-text');
+		var el1 = document.querySelector('.my-text1');
+		var el2 = document.querySelector('.my-text2');
+
+
+					var options = {
+					    size: 100,         // Font size, defined by the height of the letters (pixels)
+					    weight:8,         // Font weight (pixels)
+					    rounded: false,    // Rounded letter endings
+					    color: '#f1f1f1',  // Font color
+					    duration: 0.5,       // Duration of the animation of each letter (seconds)
+					    delay: [0, 0.05],  // Delay animation among letters (seconds)
+					    fade: 0.5,         // Fade effect duration (seconds)
+					    easing: d3_ease.easeCubicInOut.ease,   // Easing function
+					    individualDelays: false,
+							          // If false (default), every letter delay increase gradually, showing letters from left to right always. If you want to show letters in a disorderly way, set it to true, and define different delays for the desired letters.
+					};
+
+
+
+			myText = new Letters(el, options);
+			myText1 = new Letters(el1, options);
+			myText2 = new Letters(el2, options);
+
+
+
+
+
+
+					$.srSmoothscroll({  //for smooth scrolling
+			     // defaults
+			     step: 55,
+			     speed: 500,
+			     ease: 'swing',
+			     target: $('body'),
+			     container: $(window)
+			   });
+
+
+
+})
+
+
+
+			var lastScrollTop=0;
+			var vpheight=$(window).height();
+			var vpwidth=$(window).width();
+			var logoheight;
+
+	$(document).ready(function(){
+
+						logoheight=$('.row2>div>svg')[0].getBoundingClientRect().height;
+				    hover();
+
+
+				    animateDiv();
+
+
+
+						$(window).bind('mousewheel DOMMouseScroll', function(event){                     //supposed to be telling the mouse scroll direc
+			    			if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+			        			// scroll up
+
+										mousedir=1;
+			    			}
+			    			else {
+			        		// scroll down
+										mousedir=0;
+			    			}
+					});
+
+	});
+
+
+
+
+	$(window).scroll(function(){                // displays the scroll direction
+		var i=0;
+		var st = $(this).scrollTop();
+		if (st > lastScrollTop){
+			i=0;
+			// downscroll code
+		}
+		else {
+			i=1;
+		 // upscroll code
+		}
+		lastScrollTop = st;
+
+
+
+		//move the logo with the page
+		if($(window).scrollTop()>=vpheight*0.5-$('.row2>div>svg')[0].getBoundingClientRect().height*0.5 && $('.page_2').offset().top-$(window).scrollTop()>50 )
+		{
+				var toppos=logopos($('.row2>div>svg')[0].getBoundingClientRect().height,$(window).scrollTop());
+				$('.row2>div>svg').css({top: Math.floor(toppos)});
+
+		}
+
+		//show/hide 'we are cood'
+		if($(window).scrollTop()+vpheight*0.7<=$('.sec2').offset().top && $('.sec1').offset().top<$(window).scrollTop()+vpheight*0.5 )
+		{
+				if(a==0){
+					window.myText.show();
+					window.myText1.hide();
+					a=1;
+				}
+
+		}else if($(window).scrollTop()+vpheight*0.7<=$('.sec3').offset().top && $('.sec2').offset().top<=$(window).scrollTop()+vpheight*0.5 )
+		{
+
+			if(a==1)
+			{
+				window.myText.hide();
+				window.myText2.hide();
+				window.myText1.show();
+				a=0;
+			}
+
+
+		}
+		else if($('.sec3').offset().top<$(window).scrollTop()+vpheight*0.5 )
+		{
+			if(a==0){
+			window.myText1.hide();
+			window.myText2.show();
+			a=1;
+			}
+
+
+
+		}else if($('.sec1').offset().top>$(window).scrollTop()+vpheight*0.5){
+			if(a==1){
+			window.myText.hide();
+			a=0;
+			}
+		}
+
+
+
+
+
+
+		//color the logo
+		if($('.row2>div>svg')[0].getBoundingClientRect().height==100&& $(window).scrollTop()>=$('.page_2').offset().top)
+		{
+				$('.row2>div>svg>circle').attr('stroke','#ffffff');
+			$('.row2>div>svg>path').attr('stroke','#ffffff');
+
+
+		}
+		else{
+			$('.row2>div>svg>path').attr('stroke','#9E2F29');
+			$('.row2>div>svg>circle').attr('stroke','#9E2F29');
+
+		}
+
+		//resize the logo
+		if($('.page_2').offset().top-$(window).scrollTop()<=logoheight)
+		{
+
+				$('.row2>div>svg').attr('height',scalevalue($(window).scrollTop(),$('.page_2').offset().top,i));
+
+				if($(window).scrollTop()>=$('.page_2').offset().top && $(window).scrollTop()+vpheight*0.7<$('.sec2').offset().top )
+				{
+
+								$('.row1, .bubbles, .bubbles_h').css("display","none");
+
+
+				}else{
+
+						$('.row1, .bubbles, .bubbles_h').css("display","block");
+				}
+
+
+
+
+
+		}
+
+
+
+
+
+
+	});
+
+
+
+
+
+
+	function scalevalue(n,m,i){
+					if(m-n<100){
+							$('.row2>div>svg').addClass('topp');
+							return 100;
+
+					}
+					else if($('.row2>div>svg')[0].getBoundingClientRect().height>=logoheight && i==1)
+					{
+							$('.row2>div>svg').removeClass('topp');
+							return logoheight;
+
+					}
+					else {
+							$('.row2>div>svg').removeClass('topp');
+							return m-n;
+					}
+	};
+
+	function logopos(n,m){
+			var position=$('.page_2').offset().top-m-n*0.5;
+			if(position<55){
+				return 50;
+			}
+			else
+			{
+				return position;
+			}
+	};
+
+	function hover(){
+	  $(".centr>svg").hover(function(){
+	    $('.logo_circle').css({"stroke-width":"20px"});
+	    $('.bubbles li, .bubbles_h li').css("animation-play-state","paused");
+	   $('.row1').css("opacity","0");
+
+
+	  },function(){
+	    $('.logo_circle').css({"stroke-width":"4px","stroke":"#9E2F29"});
+   $('.bubbles li, .bubbles_h li').css("animation-play-state","running");
+	    $('.row1').css("opacity","1");
+
+
+	  });
+
+
+	  };
+
+
+	function makeNewPosition(){
+
+	    // Get viewport dimensions (remove the dimension of the div)
+	    var h = $(window).height() - 200;
+	    var w = $(window).width() - 200;
+
+	    var nh = Math.floor(Math.random() * h);
+	    var nw = Math.floor(Math.random() * w);
+
+	    return [nh,nw];
+
+	};
+
+	function animateDiv(){
+	    var newq = makeNewPosition();
+	    var oldq = $('.c1').offset();
+	    var speed = calcSpeed([oldq.top, oldq.left], newq);
+
+
+			if($('.row2>div>svg')[0].getBoundingClientRect().height>100){
+			$('.c1').animate({ top: newq[0], left: newq[1] }, speed*0.8, function(){
+	      animateDiv();
+	    });
+	     $('.c2').animate({ top: newq[1]*0.4, left: newq[0]*0.9}, speed/0.7, function(){
+	      animateDiv();
+	    });
+	     $('.c3').animate({ top: newq[0]*0.75, left: newq[1]*0.8}, speed*0.5, function(){
+	      animateDiv();
+	    });
+	     $('.c4').animate({ top: newq[1], left: newq[0]}, speed, function(){
+	      animateDiv();
+	    });
+	    $('.c5').animate({ top: newq[0]*0.8, left: newq[1]*0.7}, speed*0.85, function(){
+	     animateDiv();
+	   });
+	   $('.c6').animate({ top: newq[1], left: newq[0]}, speed*1.2, function(){
+	    animateDiv();
+	  });}
+
+	};
+
+	function calcSpeed(prev, next) {
+
+	    var x = Math.abs(prev[1] - next[1]);
+	    var y = Math.abs(prev[0] - next[0]);
+
+	    var greatest = x > y ? x : y;
+
+	    var speedModifier = 0.06;
+
+	    var speed = Math.ceil(greatest/speedModifier);
+
+	    return speed;
+
+	};
+
+	</script>
+	<title>COOD</title>
+</head>
+<!-- hijacking: on/off - animation: none/scaleDown/rotate/gallery/catch/opacity/fixed/parallax -->
+
+<body>
+<!-- svg icon -->
+				<svg class="hidden">
+				<symbol id="icon-play" viewBox="0 0 60 60">
+					<path d="m53.48 27.435l-42.807-26.52c-3.119-2.047-5.672-.541-5.672 3.346v51.48c0 3.885 2.553 5.391 5.672 3.346l42.807-26.52c0 0 1.521-1.07 1.521-2.566s-1.521-2.566-1.521-2.566" />
+				</symbol>
+			</svg>
+<!-- svg icon -->
+
+
+
+
+
+						<div class='back'>
+
+
+							<ul class="bubbles">
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="25"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="15"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="35"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="12"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+											 A 60 60, 0, 1, 0, 120 120
+												" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="25"/></li>
+							 <li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+										 A 60 60, 0, 1, 0, 120 120
+										" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="25"/></li>
+										<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+												<path class="logo_c" d="M135 80
+													 A 60 60, 0, 1, 0, 120 120
+												" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="28"/></li>
+												<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+														<path class="logo_c" d="M135 80
+															 A 60 60, 0, 1, 0, 120 120
+														" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="19"/></li>
+														<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+																<path class="logo_c" d="M135 80
+																	 A 60 60, 0, 1, 0, 120 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/></li>
+																<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+																		<path class="logo_c" d="M135 80
+																			 A 60 60, 0, 1, 0, 120 120
+																		" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="29"/></li>
+																		<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+																				<path class="logo_c" d="M135 80
+																					 A 60 60, 0, 1, 0, 120 120
+																				" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="19"/></li>
+							</ul>
+							<ul class="bubbles_h">
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="25"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="15"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="35"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+																 A 60 60, 0, 1, 0, 120 120
+																	" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="12"/></li>
+									<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+											 A 60 60, 0, 1, 0, 120 120
+												" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="25"/></li>
+							 <li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+										<path class="logo_c" d="M135 80
+										 A 60 60, 0, 1, 0, 120 120
+										" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="25"/></li>
+										<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+												<path class="logo_c" d="M135 80
+													 A 60 60, 0, 1, 0, 120 120
+												" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="28"/></li>
+												<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+														<path class="logo_c" d="M135 80
+															 A 60 60, 0, 1, 0, 120 120
+														" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="19"/></li>
+														<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+																<path class="logo_c" d="M135 80
+																	 A 60 60, 0, 1, 0, 120 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/></li>
+																<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+																		<path class="logo_c" d="M135 80
+																			 A 60 60, 0, 1, 0, 120 120
+																		" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="29"/></li>
+																		<li><svg class="cq" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+																				<path class="logo_c" d="M135 80
+																					 A 60 60, 0, 1, 0, 120 120
+																				" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="19"/></li>
+							</ul>
+							<div class="row1">
+								<div class="c1"><svg  width="160px" height="160px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+									<path class="logo_c" d="M170 50
+															 A 80 80, 0, 1, 0, 170 150
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/>
+								</svg></div>
+								<div class="c2"><svg  width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+									<path class="logo_c" d="M170 80
+															 A 80 80, 0, 1, 0, 170 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="30"/>
+								</svg></div>
+								<div class="c3"><svg  width="80px" height="80px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+									<path class="logo_c" d="M170 80
+															 A 80 80, 0, 1, 0, 170 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/>
+								</svg></div>
+								<div class="c5"><svg  width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+									<path class="logo_c" d="M170 80
+															 A 70 70, 0, 1, 0, 170 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/>
+								</svg></div>
+								<div class="c6"><svg  width="200px" height="200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+									<path class="logo_c" d="M170 80
+															 A 80 80, 0, 1, 0, 170 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="20"/>
+								</svg></div>
+								<div class="c4"><svg  width="130px" height="130px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMaxYMax">
+									<path class="logo_c" d="M170 80
+															 A 80 80, 0, 1, 0, 170 120
+																" fill="rgba(0,0,0,0)" stroke="rgba(200,200,200,0.7)" stroke-width="26"/>
+								</svg></div>
+
+						 </div>
+
+
+
+						</div>
+
+
+
+						<div class="row2">
+						<div class="col-md-2 col-md-offset-5 centr">
+							<svg  xmlns="http://www.w3.org/2000/svg" viewBox="1 8 180 180" preserveAspectRatio="xMaxYMax">
+
+								<path class="logo_c" d="M49 90
+													 A 13 13, 0, 1, 0, 49 110
+														" fill="rgba(0,0,0,0)" stroke="#9E2F29" stroke-width="5"/>
+
+								<path class="logo_o1" d="M67 87
+													 A 14 14, 0, 1, 0, 80 87
+														" fill="rgba(0,0,0,0)" stroke="#9E2F29" stroke-width="5"/>
+								<path class="logo_o2" d="M106 87
+													 A 14 14, 0, 1, 0, 119 87
+														" fill="rgba(0,0,0,0)" stroke="#9E2F29" stroke-width="5"/>
+								<path class="logo_d" d="M137 90
+													 A 13 13, 0, 1, 1, 137 110
+														" fill="rgba(0,0,0,0)" stroke="#9E2F29" stroke-width="5"/>
+
+								<circle class="logo_circle" cx="92" cy="100" r="80" stroke="#9E2F29" stroke-width="3" fill="rgba(255,255,255,0)" />
+						</svg>
+						</div>
+						</div>
+
+
+						<div class="page_2">
+							<div class="row" style="z-index:1">
+								<div class="col-md-8 col-md-offset-2">
+									<div class="my-text">WE ARE COOD</div>
+
+
+							</div>
+						</div>
+							<div class="row" >
+								<div class="col-md-8 col-md-offset-2" style="z-index:3">
+									<div class="my-text1">WE ARE DESIGNERS</div>
+
+
+								</div>
+							</div>
+							<div class="row" >
+								<div class="col-md-8 col-md-offset-2" style="z-index:4">
+									<div class="my-text2">WE DESIGN SPACES</div>
+
+
+								</div>
+							</div>
+							<div class="sec1">
+								
+							</div>
+							<div class="sec2" style="z-index:2; position:absolute">
+
+							</div>
+							<div class="sec3" style="z-index:3;position:absolute; margin-top:100vh">
+
+							</div>
+						</div>
+
+
+
+
+
+
+
+</body>
+</html>
