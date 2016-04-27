@@ -64,7 +64,7 @@
 
 
 
-		/*			$.srSmoothscroll({  //for smooth scrolling
+					$.srSmoothscroll({  //for smooth scrolling
 			     // defaults
 			     step: 55,
 			     speed: 500,
@@ -72,7 +72,7 @@
 			     target: $('body'),
 			     container: $(window)
 			   });
-*/
+
 
 
 })
@@ -216,6 +216,30 @@
 		}
 
 
+		// animation in sec 1
+		if($('.sec1').offset().top<=$(window).scrollTop())
+		{	
+			$('.frame').css("visibility","visible");
+			$('.frame').css("stroke-dasharray",$('.frame').attr('width')*2+$('.frame').attr('height')*2);
+			$('.frame').css("animation-play-state","running");
+			$('.box1').css("visibility","visible");
+			$('.box2').css("visibility","visible");
+			$('.box1').css({'top': tpos($(window).scrollTop(),$('.sec1').offset().top,'box1'),'left':leftpos($(window).scrollTop(),$('.sec1').offset().top,'box1')});
+			
+
+			$('.box2').css({'top': tpos($(window).scrollTop(),$('.sec1').offset().top,'box2'),'right':leftpos($(window).scrollTop(),$('.sec1').offset().top,'box2')})
+		}
+
+
+		if($('.sec2').offset().top<=$('.recta').offset().top+$('.recta').outerHeight(true)){
+			if($('.sec2').offset().top-$(window).scrollTop()-$('.recta').outerHeight(true)*0.5>150){
+			$('.recta').css("top",$('.sec2').offset().top-$(window).scrollTop()-$('.recta').outerHeight(true)*0.5);
+			}else{
+
+			}
+		}
+
+
 
 
 
@@ -224,7 +248,34 @@
 
 
 
+	function tpos(n,m,l){
+		var screentop=n;
+		var elemtop=m;
 
+		if(l=='box1')
+		{
+			return (n-m)/2;
+		}
+		else if(l=='box2')
+		{
+			return n/m*100;
+		}
+	};
+
+	function leftpos(n,m,l){
+		var screentop=n;
+		var elemtop=m;
+		if(l=='box1')
+		{
+			return (n-m)/6;
+		}
+		else if(l=='box2')
+		{
+			return n-m;
+		}
+		
+
+	};
 
 
 	function scalevalue(n,m,i){
@@ -258,13 +309,13 @@
 
 	function hover(){
 	  $(".centr>svg").hover(function(){
-	    $('.logo_circle').css({"stroke-width":"20px"});
+	    $('.logo_circle').css({"stroke-width":"10px"});
 	    $('.bubbles li, .bubbles_h li').css("animation-play-state","paused");
 	   $('.row1').css("opacity","0");
 
 
 	  },function(){
-	    $('.logo_circle').css({"stroke-width":"4px","stroke":"#9E2F29"});
+	    $('.logo_circle').css({"stroke-width":"4px"});
    $('.bubbles li, .bubbles_h li').css("animation-play-state","running");
 	    $('.row1').css("opacity","1");
 
@@ -337,13 +388,7 @@
 <!-- hijacking: on/off - animation: none/scaleDown/rotate/gallery/catch/opacity/fixed/parallax -->
 
 <body>
-<!-- svg icon -->
-				<svg class="hidden">
-				<symbol id="icon-play" viewBox="0 0 60 60">
-					<path d="m53.48 27.435l-42.807-26.52c-3.119-2.047-5.672-.541-5.672 3.346v51.48c0 3.885 2.553 5.391 5.672 3.346l42.807-26.52c0 0 1.521-1.07 1.521-2.566s-1.521-2.566-1.521-2.566" />
-				</symbol>
-			</svg>
-<!-- svg icon -->
+
 
 
 
@@ -491,7 +536,7 @@
 
 
 						<div class="row2">
-						<div class="col-md-2 col-md-offset-5 centr">
+						<div class="col-md-2 col-md-offset-5 col-xs-4 col-xs-offset-4 centr">
 							<svg  xmlns="http://www.w3.org/2000/svg" viewBox="1 8 180 180" preserveAspectRatio="xMaxYMax">
 
 								<path class="logo_c" d="M49 90
@@ -516,7 +561,7 @@
 
 						<div class="page_2">
 							<div class="row" style="z-index:1">
-								<div class="col-md-8 col-md-offset-2">
+								<div class="col-md-8 col-md-offset-2" style="z-index:2">
 									<div class="my-text">WE ARE COOD</div>
 
 
@@ -537,7 +582,18 @@
 								</div>
 							</div>
 							<div class="sec1">
-								
+									<div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 recta">
+										<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 530"preserveAspectRatio="xMaxYMax">
+											
+											<path class="frame" d="M12 12 H1012 V512" stroke="white" stroke-width="20" fill="transparent"/>
+											<path class="frame" d="M12 2 V512 H1022" stroke="white" stroke-width="20" fill="transparent"/>
+											
+										</svg>
+									</div>
+									<div class="box1">
+									</div>
+									<div class="box2">
+									</div>
 							</div>
 							<div class="sec2" style="z-index:2; position:absolute">
 
@@ -545,6 +601,7 @@
 							<div class="sec3" style="z-index:3;position:absolute; margin-top:100vh">
 
 							</div>
+
 						</div>
 
 
