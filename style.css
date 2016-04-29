@@ -429,6 +429,7 @@ div#footer
     top: 50%;
     transform:translateY(-50%);
     z-index:2;
+    transition:all 0.1s linear;
    
 
 }
@@ -443,6 +444,43 @@ div#footer
     
 }
 
+    /*hand */
+
+    .hand{
+        width:100%;
+        height:auto;
+        position: fixed !important;
+        top:50%;
+        left:-50%;
+        transform:translateY(-50%);
+    }
+    .fingers{
+        z-index:1;
+    }
+    .thumb{
+        z-index:10;
+        transition:all 0.8s ease-in-out;
+    }
+    /* hf=handfill
+        hs=handstroke           hs1=light brown
+        tf=thumbfill            hs2=dark brown
+        ts=thumbstroke */
+
+    .hf3{fill-rule:evenodd;clip-rule:evenodd;fill:#D89775;}
+    .hf1{fill-rule:evenodd;clip-rule:evenodd;fill:#D99876;}
+    .tf1{fill-rule:evenodd;clip-rule:evenodd;fill:#DA9877;}
+    .tf2{fill-rule:evenodd;clip-rule:evenodd;fill:#AE7B60;}
+    .hf2{fill-rule:evenodd;clip-rule:evenodd;fill:#AF7B60;}
+    .hs1{fill-rule:evenodd;clip-rule:evenodd;fill:#120F0D;}
+    .tf3{fill-rule:evenodd;clip-rule:evenodd;fill:#E6B59F;}
+    .hs2{fill-rule:evenodd;clip-rule:evenodd;fill:#4E4038;}
+    .tf4{fill-rule:evenodd;clip-rule:evenodd;fill:#E9C3AF;}
+    .ts1{fill-rule:evenodd;clip-rule:evenodd;fill:#231A15;}
+    
+
+    /* end hand */
+
+    /*  photo frame */
     .st0{opacity:0.25;fill:none;stroke:#709CD2;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;}
     .st1{fill:none;stroke:#578FCB;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
     .st2{fill:none;stroke:#0073BC;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;}
@@ -460,6 +498,8 @@ div#footer
     .st13{fill:none;stroke:#A9C0E4;stroke-width:0.65;stroke-linecap:round;stroke-linejoin:round;}
     .st14{fill:none;stroke:#3081C4;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round;}
     .st15{opacity:0.3;fill:none;stroke:#5E93CD;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;}
+        /* end photo fraem*/
+
 
     .hill1, .hill2,  .hill3, .hill4, .cld1,.cld2,.cld3,.cld4,.cld5,.mnd1, .mnd2, .hill5
     {
