@@ -429,16 +429,17 @@ div#footer
     top: 50%;
     transform:translateY(-50%);
     z-index:2;
-    transition:all 0.1s linear;
+    /*transition:all 0.1s linear;*/
    
 
 }
 
 .frame{
-     stroke-dasharray:2000;
-    stroke-dashoffset:0;
-   
+    /* stroke-dasharray:2000;
+    stroke-dashoffset:0;*/
+   opacity:0;
     visibility:hidden;
+    transition:all 0.8s ease-in-out;
 
     
     
@@ -446,37 +447,23 @@ div#footer
 
     /*hand */
 
-    .hand{
+    
+    .fingers, .thumb{
         width:100%;
         height:auto;
-        position: fixed !important;
+        z-index:1;
+       position: fixed !important;
         top:50%;
         left:-50%;
-        transform:translateY(-50%);
-    }
-    .fingers{
-        z-index:1;
+         transform:translateY(-50%);
+         transition:scale 0.8s ease-in-out;
     }
     .thumb{
-        z-index:10;
-        transition:all 0.8s ease-in-out;
+        z-index:3 !important;
+        transition:scale 1s ease-in-out;
     }
-    /* hf=handfill
-        hs=handstroke           hs1=light brown
-        tf=thumbfill            hs2=dark brown
-        ts=thumbstroke */
-
-    .hf3{fill-rule:evenodd;clip-rule:evenodd;fill:#D89775;}
-    .hf1{fill-rule:evenodd;clip-rule:evenodd;fill:#D99876;}
-    .tf1{fill-rule:evenodd;clip-rule:evenodd;fill:#DA9877;}
-    .tf2{fill-rule:evenodd;clip-rule:evenodd;fill:#AE7B60;}
-    .hf2{fill-rule:evenodd;clip-rule:evenodd;fill:#AF7B60;}
-    .hs1{fill-rule:evenodd;clip-rule:evenodd;fill:#120F0D;}
-    .tf3{fill-rule:evenodd;clip-rule:evenodd;fill:#E6B59F;}
-    .hs2{fill-rule:evenodd;clip-rule:evenodd;fill:#4E4038;}
-    .tf4{fill-rule:evenodd;clip-rule:evenodd;fill:#E9C3AF;}
-    .ts1{fill-rule:evenodd;clip-rule:evenodd;fill:#231A15;}
     
+   
 
     /* end hand */
 
